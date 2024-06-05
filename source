@@ -3,13 +3,12 @@ local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Name = "Shenzzz"
-gui.DisplayOrder = 999
 gui.Parent = game:GetService("CoreGui")
 
 -- Create a container frame to hold both the assistive touch button and the main frame
 local containerFrame = Instance.new("Frame")
-containerFrame.Size = UDim2.new(0, 500, 0, 350)
-containerFrame.Position = UDim2.new(0.5, -250, 0.5, -175)
+containerFrame.Size = UDim2.new(0, 230, 0, 300)  -- Adjusted size
+containerFrame.Position = UDim2.new(0.5, -115, 0.5, -150)  -- Adjusted position
 containerFrame.BackgroundTransparency = 1  -- Make the container frame transparent
 containerFrame.Active = true
 containerFrame.Draggable = true
@@ -21,28 +20,14 @@ local yOffset = 10
 local buttonHeight = 30
 local buttonSpacing = 5
 local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
-local totalWidth = 230
+local totalWidth = 210  -- Adjusted width
 frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
-frame.Position = UDim2.new(0, 0, 0, 30)
+frame.Position = UDim2.new(0, 10, 0, 10)  -- Adjusted position
 frame.BackgroundTransparency = 0.5
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderColor3 = Color3.fromRGB(0, 255, 255)
 frame.ZIndex = 9
 frame.Parent = containerFrame
-
--- Add Background Image
-local backgroundImage = Instance.new("ImageLabel")
-backgroundImage.Name = "BackgroundImage"
-backgroundImage.Parent = frame
-backgroundImage.Size = UDim2.new(1, 0, 1, 0)
-backgroundImage.Position = UDim2.new(0, 0, 0, 0)
-backgroundImage.Image = "rbxassetid://159991693"
-backgroundImage.ImageColor3 = Color3.fromRGB(0, 255, 255)
-backgroundImage.ImageTransparency = 0.600
-backgroundImage.ScaleType = Enum.ScaleType.Tile
-backgroundImage.SliceCenter = Rect.new(0, 256, 0, 256)
-backgroundImage.TileSize = UDim2.new(0, 30, 0, 30)
-backgroundImage.ZIndex = 8
 
 -- Create Title Bar
 local titleBarLabel = Instance.new("TextLabel")
@@ -54,7 +39,7 @@ titleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 titleBarLabel.BorderSizePixel = 0
 titleBarLabel.Size = UDim2.new(1, 0, 0, 30)
 titleBarLabel.Font = Enum.Font.SourceSans
-titleBarLabel.Text = "____/SYSTEMBROKEN\\___"
+titleBarLabel.Text = "____/GRAPKILL BY ERO\\___"
 titleBarLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
 titleBarLabel.TextScaled = true
 titleBarLabel.TextSize = 14.000
@@ -67,7 +52,7 @@ local assistiveTouch = Instance.new("TextButton")
 assistiveTouch.Text = "G"
 assistiveTouch.TextSize = 24
 assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(1, -40, 0, 0)
+assistiveTouch.Position = UDim2.new(1, -40, 0, 10)
 assistiveTouch.BackgroundColor3 = Color3.fromRGB(0.8, 0.8, 0.8)
 assistiveTouch.Parent = containerFrame
 
