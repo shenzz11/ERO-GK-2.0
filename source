@@ -6,12 +6,13 @@ gui.Name = "Shenzzz"
 gui.DisplayOrder = 999
 gui.Parent = game:GetService("CoreGui")
 
--- UI Script
-local uiScript = [[
+-- Create SysBroker UI
+local SysBroker = Instance.new("Frame")
 SysBroker.Name = "SysBroker"
-SysBroker.Parent = game.CoreGui
+SysBroker.Parent = gui
 SysBroker.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+local Background = Instance.new("ImageLabel")
 Background.Name = "Background"
 Background.Parent = SysBroker
 Background.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -29,6 +30,7 @@ Background.TileSize = UDim2.new(0, 30, 0, 30)
 Background.Active = true
 Background.Draggable = true
 
+local TitleBarLabel = Instance.new("TextLabel")
 TitleBarLabel.Name = "TitleBarLabel"
 TitleBarLabel.Parent = Background
 TitleBarLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -36,47 +38,31 @@ TitleBarLabel.BackgroundTransparency = 0.250
 TitleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TitleBarLabel.BorderSizePixel = 0
 TitleBarLabel.Size = UDim2.new(1, 0, 0, 30)
-TitleBarLabel.Font = Enum.Font.Unknown
+TitleBarLabel.Font = Enum.Font.SourceSans
 TitleBarLabel.Text = "____/SYSTEMBROKEN\\___"
 TitleBarLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
 TitleBarLabel.TextScaled = true
 TitleBarLabel.TextSize = 14.000
 TitleBarLabel.TextWrapped = true
 TitleBarLabel.TextXAlignment = Enum.TextXAlignment.Left
-]]
 
-local success, errorMsg = pcall(function()
-    loadstring(uiScript)()
-end)
-
-if not success then
-    warn("Error while loading UI script:", errorMsg)
-end
-
--- Create main frame
+-- Create main frame for buttons
 local frame = Instance.new("Frame")
-local yOffset = 10
-local buttonHeight = 30
-local buttonSpacing = 5
-local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
-local totalWidth = 230
-frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
-frame.Position = UDim2.new(1, -totalWidth, 0, 10)
+frame.Size = UDim2.new(0, 230, 0, 400)
+frame.Position = UDim2.new(0, 10, 0, 40)
 frame.BackgroundTransparency = 0.5
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.Active = true
 frame.Draggable = true
-frame.Parent = gui
+frame.Parent = Background
 
 -- Function to create toggle buttons
 local function createToggleButton(text, toggleFunction, customCode)
     local button = Instance.new("TextButton")
     button.Text = text .. ": OFF"
-    button.Size = UDim2.new(0, 180, 0, buttonHeight)
-    button.Position = UDim2.new(0, 10, 0, yOffset)
+    button.Size = UDim2.new(0, 180, 0, 30)
+    button.Position = UDim2.new(0, 10, 0, #frame:GetChildren() * 35 + 10)
     button.Parent = frame
-
-    yOffset = yOffset + buttonHeight + buttonSpacing
 
     local isEnabled = false
 
@@ -148,8 +134,8 @@ createToggleButton("GiveSpeed", toggleSpeedScript)
 -- Grapple Length Button
 local button6 = Instance.new("TextButton")
 button6.Text = "GrappleLength: OFF"
-button6.Size = UDim2.new(0, 180, 0, buttonHeight)
-button6.Position = UDim2.new(0, 10, 0, yOffset)
+button6.Size = UDim2.new(0, 180, 0, 30)
+button6.Position = UDim2.new(0, 10, 0, #frame:GetChildren() * 35 + 10)
 button6.Parent = frame
 
 local executingGrapple = false
