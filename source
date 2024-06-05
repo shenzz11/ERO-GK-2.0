@@ -6,6 +6,53 @@ gui.Name = "Shenzzz"
 gui.DisplayOrder = 999
 gui.Parent = game:GetService("CoreGui")
 
+-- UI Script
+local uiScript = [[
+SysBroker.Name = "SysBroker"
+SysBroker.Parent = game.CoreGui
+SysBroker.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Background.Name = "Background"
+Background.Parent = SysBroker
+Background.AnchorPoint = Vector2.new(0.5, 0.5)
+Background.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Background.BorderColor3 = Color3.fromRGB(0, 255, 255)
+Background.Position = UDim2.new(0.5, 0, 0.5, 0)
+Background.Size = UDim2.new(0, 500, 0, 350)
+Background.ZIndex = 9
+Background.Image = "rbxassetid://159991693"
+Background.ImageColor3 = Color3.fromRGB(0, 255, 255)
+Background.ImageTransparency = 0.600
+Background.ScaleType = Enum.ScaleType.Tile
+Background.SliceCenter = Rect.new(0, 256, 0, 256)
+Background.TileSize = UDim2.new(0, 30, 0, 30)
+Background.Active = true
+Background.Draggable = true
+
+TitleBarLabel.Name = "TitleBarLabel"
+TitleBarLabel.Parent = Background
+TitleBarLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TitleBarLabel.BackgroundTransparency = 0.250
+TitleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TitleBarLabel.BorderSizePixel = 0
+TitleBarLabel.Size = UDim2.new(1, 0, 0, 30)
+TitleBarLabel.Font = Enum.Font.Unknown
+TitleBarLabel.Text = "____/SYSTEMBROKEN\\___"
+TitleBarLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
+TitleBarLabel.TextScaled = true
+TitleBarLabel.TextSize = 14.000
+TitleBarLabel.TextWrapped = true
+TitleBarLabel.TextXAlignment = Enum.TextXAlignment.Left
+]]
+
+local success, errorMsg = pcall(function()
+    loadstring(uiScript)()
+end)
+
+if not success then
+    warn("Error while loading UI script:", errorMsg)
+end
+
 -- Create main frame
 local frame = Instance.new("Frame")
 local yOffset = 10
@@ -46,22 +93,6 @@ local function createToggleButton(text, toggleFunction, customCode)
     button.MouseButton1Click:Connect(toggleButton)
     return button
 end
-
--- Create Assistive Touch Button
-local assistiveTouch = Instance.new("TextButton")
-assistiveTouch.Text = "G"
-assistiveTouch.TextSize = 24
-assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(1, -40, 0, 10)
-assistiveTouch.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
-assistiveTouch.Parent = gui
-
-local collapsed = true
-
-assistiveTouch.MouseButton1Click:Connect(function()
-    collapsed = not collapsed
-    frame.Visible = not collapsed
-end)
 
 -- Toggle Damage Size Function
 local function toggleDamageSize(isEnabled)
