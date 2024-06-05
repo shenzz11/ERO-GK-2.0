@@ -1,3 +1,4 @@
+
 -- Create main GUI
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
@@ -14,20 +15,20 @@ containerFrame.Active = true
 containerFrame.Draggable = true
 containerFrame.Parent = gui
 
--- Create main frame
+-- Create main frame with updated design
 local frame = Instance.new("Frame")
 local yOffset = 10
 local buttonHeight = 30
 local buttonSpacing = 5
 local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
-local totalWidth = 230
+local totalWidth = 210  -- Adjusted width
 frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
-frame.Position = UDim2.new(1, -totalWidth, 0, 10)
+frame.Position = UDim2.new(0, 10, 0, 10)  -- Adjusted position
 frame.BackgroundTransparency = 0.5
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.Active = true
-frame.Draggable = true
-frame.Parent = gui
+frame.BorderColor3 = Color3.fromRGB(0, 255, 255)
+frame.ZIndex = 9
+frame.Parent = containerFrame
 
 -- Create Title Bar
 local titleBarLabel = Instance.new("TextLabel")
@@ -39,7 +40,7 @@ titleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 titleBarLabel.BorderSizePixel = 0
 titleBarLabel.Size = UDim2.new(1, 0, 0, 30)
 titleBarLabel.Font = Enum.Font.SourceSans
-titleBarLabel.Text = "____/SYSTEMBROKEN\\___"
+titleBarLabel.Text = "____/GRAPKILL NI ERO\\___"
 titleBarLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
 titleBarLabel.TextScaled = true
 titleBarLabel.TextSize = 14.000
@@ -52,7 +53,7 @@ local assistiveTouch = Instance.new("TextButton")
 assistiveTouch.Text = "G"
 assistiveTouch.TextSize = 24
 assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(1, -40, 0, 45)
+assistiveTouch.Position = UDim2.new(1, -40, 0, 10)
 assistiveTouch.BackgroundColor3 = Color3.fromRGB(0.8, 0.8, 0.8)
 assistiveTouch.Parent = containerFrame
 
