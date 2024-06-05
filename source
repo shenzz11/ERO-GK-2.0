@@ -3,22 +3,40 @@ local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Name = "SysBroker"
-gui.Parent = game:GetService("CoreGui")
+gui.Parent = game.CoreGui
 
 -- Create main frame
 local frame = Instance.new("Frame")
-local yOffset = 10
+local yOffset = 40  -- Adjusted yOffset to accommodate the title bar
 local buttonHeight = 30
 local buttonSpacing = 5
-local totalHeight = 9 * buttonHeight + 8 * buttonSpacing  -- Adjusted total height
+local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
 local totalWidth = 230
 frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
 frame.Position = UDim2.new(1, -totalWidth, 0, 10)
 frame.BackgroundTransparency = 0.5
-frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BackgroundColor3 = Color3.new(30/255, 30/255, 30/255) -- Updated background color
 frame.Active = true
 frame.Draggable = true
 frame.Parent = gui
+
+-- Title Bar
+local titleBar = Instance.new("Frame")
+titleBar.Name = "TitleBar"
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = frame
+
+local titleTextLabel = Instance.new("TextLabel")
+titleTextLabel.Name = "TitleTextLabel"
+titleTextLabel.Size = UDim2.new(1, 0, 1, 0)
+titleTextLabel.BackgroundTransparency = 1
+titleTextLabel.Text = "GRAPKILL BY ERO"
+titleTextLabel.TextColor3 = Color3.new(1, 1, 1)
+titleTextLabel.Font = Enum.Font.SourceSansBold
+titleTextLabel.TextSize = 18
+titleTextLabel.Parent = titleBar
 
 -- Function to create toggle buttons
 local function createToggleButton(text, toggleFunction, customCode)
@@ -51,7 +69,7 @@ local assistiveTouch = Instance.new("TextButton")
 assistiveTouch.Text = "G"
 assistiveTouch.TextSize = 24
 assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(1, -40, 0, -10)  -- Adjusted position
+assistiveTouch.Position = UDim2.new(1, -40, 0, 45) -- Adjusted position to move it slightly higher
 assistiveTouch.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
 assistiveTouch.Parent = gui
 
@@ -117,7 +135,7 @@ createToggleButton("GiveSpeed", toggleSpeedScript)
 local button6 = Instance.new("TextButton")
 button6.Text = "GrappleLength: OFF"
 button6.Size = UDim2.new(0, 180, 0, buttonHeight)
-button6.Position = UDim2.new(0, 10, 0, 7 * (buttonHeight + buttonSpacing))  -- Adjusted position
+button6.Position = UDim2.new(0, 10, 0, yOffset)
 button6.Parent = frame
 
 local executingGrapple = false
@@ -129,10 +147,10 @@ end)
 
 spawn(function()
     while true do
-        wait(0.0001) -- Reduce the interval to 0.005 seconds for quicker adjustment
+        wait(0.0001) -- Reduce the interval to 0.005 seconds for quicker adjustments
         if executingGrapple then
             local args = {
-                [1] = -5  -- Adjust the value to 0.1 for faster adjustments
+                [1] = -1  -- Adjust the value to 0.1 for faster adjustments
             }
             game:GetService("ReplicatedStorage").Events.Remote.Client.changeRopeLength:FireServer(unpack(args))
         end
