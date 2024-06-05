@@ -6,55 +6,103 @@ gui.Name = "Shenzzz"
 gui.DisplayOrder = 999
 gui.Parent = game:GetService("CoreGui")
 
--- Create main frame
+-- Create SysBroker UI
+local SysBroker = Instance.new("Frame")
+SysBroker.Name = "SysBroker"
+SysBroker.Parent = gui
+SysBroker.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+SysBroker.Size = UDim2.new(1, 0, 1, 0)
+
+local Background = Instance.new("ImageLabel")
+Background.Name = "Background"
+Background.Parent = SysBroker
+Background.AnchorPoint = Vector2.new(0.5, 0.5)
+Background.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Background.BorderColor3 = Color3.fromRGB(0, 255, 255)
+Background.Position = UDim2.new(0.5, 0, 0.5, 0)
+Background.Size = UDim2.new(0, 500, 0, 350)
+Background.ZIndex = 9
+Background.Image = "rbxassetid://159991693"
+Background.ImageColor3 = Color3.fromRGB(0, 255, 255)
+Background.ImageTransparency = 0.600
+Background.ScaleType = Enum.ScaleType.Tile
+Background.SliceCenter = Rect.new(0, 256, 0, 256)
+Background.TileSize = UDim2.new(0, 30, 0, 30)
+Background.Active = true
+Background.Draggable = true
+
+local TitleBarLabel = Instance.new("TextLabel")
+TitleBarLabel.Name = "TitleBarLabel"
+TitleBarLabel.Parent = Background
+TitleBarLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TitleBarLabel.BackgroundTransparency = 0.250
+TitleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TitleBarLabel.BorderSizePixel = 0
+TitleBarLabel.Size = UDim2.new(1, 0, 0, 30)
+TitleBarLabel.Font = Enum.Font.SourceSans
+TitleBarLabel.Text = "____/SYSTEMBROKEN\\___"
+TitleBarLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
+TitleBarLabel.TextScaled = true
+TitleBarLabel.TextSize = 14.000
+TitleBarLabel.TextWrapped = true
+TitleBarLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Section List
+local SectionList = Instance.new("Frame")
+SectionList.Name = "SectionList"
+SectionList.Parent = Background
+SectionList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SectionList.BackgroundTransparency = 0.500
+SectionList.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SectionList.BorderSizePixel = 0
+SectionList.Position = UDim2.new(0, 0, 0, 30)
+SectionList.Size = UDim2.new(0, 105, 0, 320)
+
+local buttonsData = {
+    {"Home", "Home_Section_Button", 25},
+    {"Game", "Game_Section_Button", 65},
+    {"Character", "Character_Section_Button", 105},
+    {"Target", "Target_Section_Button", 145},
+    {"Animations", "Animations_Section_Button", 185},
+    {"Misc", "Misc_Section_Button", 225},
+    {"Credits", "Credits_Section_Button", 265}
+}
+
+for _, data in ipairs(buttonsData) do
+    local button = Instance.new("TextButton")
+    button.Name = data[2]
+    button.Parent = SectionList
+    button.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+    button.BackgroundTransparency = 0.500
+    button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    button.BorderSizePixel = 0
+    button.Position = UDim2.new(0, 0, 0, data[3])
+    button.Size = UDim2.new(0, 105, 0, 30)
+    button.Font = Enum.Font.Oswald
+    button.Text = data[1]
+    button.TextColor3 = Color3.fromRGB(0, 0, 0)
+    button.TextScaled = true
+    button.TextSize = 14.000
+    button.TextWrapped = true
+end
+
+-- Main frame for toggles
 local frame = Instance.new("Frame")
-local yOffset = 10
-local buttonHeight = 30
-local buttonSpacing = 5
-local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
-local totalWidth = 230
-frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
-frame.Position = UDim2.new(1, -totalWidth, 0, 10)
-frame.BackgroundTransparency = 0.5
+frame.Size = UDim2.new(0, 395, 0, 320)
+frame.Position = UDim2.new(0, 105, 0, 30)
+frame.BackgroundTransparency = 1.0
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.Active = true
 frame.Draggable = true
-frame.Parent = gui
-
--- Create Assistive Touch Button
-local assistiveTouch = Instance.new("TextButton")
-assistiveTouch.Text = "G"
-assistiveTouch.TextSize = 24
-assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(1, -40, 0, 10)
-assistiveTouch.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
-assistiveTouch.Active = true
-assistiveTouch.Draggable = true
-assistiveTouch.Parent = gui
-
-local collapsed = true
-
-assistiveTouch.MouseButton1Click:Connect(function()
-    collapsed = not collapsed
-    frame.Visible = not collapsed
-end)
-
--- Make frame follow assistive touch button
-assistiveTouch.Changed:Connect(function(property)
-    if property == "Position" then
-        frame.Position = UDim2.new(assistiveTouch.Position.X.Scale, assistiveTouch.Position.X.Offset - totalWidth + 30, assistiveTouch.Position.Y.Scale, assistiveTouch.Position.Y.Offset)
-    end
-end)
+frame.Parent = Background
 
 -- Function to create toggle buttons
 local function createToggleButton(text, toggleFunction, customCode)
     local button = Instance.new("TextButton")
     button.Text = text .. ": OFF"
-    button.Size = UDim2.new(0, 180, 0, buttonHeight)
-    button.Position = UDim2.new(0, 10, 0, yOffset)
+    button.Size = UDim2.new(0, 180, 0, 30)
+    button.Position = UDim2.new(0, 10, 0, (#frame:GetChildren() - 1) * 35 + 10)
     button.Parent = frame
-
-    yOffset = yOffset + buttonHeight + buttonSpacing
 
     local isEnabled = false
 
@@ -126,8 +174,8 @@ createToggleButton("GiveSpeed", toggleSpeedScript)
 -- Grapple Length Button
 local button6 = Instance.new("TextButton")
 button6.Text = "GrappleLength: OFF"
-button6.Size = UDim2.new(0, 180, 0, buttonHeight)
-button6.Position = UDim2.new(0, 10, 0, yOffset)
+button6.Size = UDim2.new(0, 180, 0, 30)
+button6.Position = UDim2.new(0, 10, 0, (#frame:GetChildren() - 1) * 35 + 10)
 button6.Parent = frame
 
 local executingGrapple = false
@@ -142,7 +190,7 @@ spawn(function()
         wait(0.0001) -- Reduce the interval to 0.005 seconds for quicker adjustment
         if executingGrapple then
             local args = {
-                [1] = -1  -- Adjust the value to 0.1 for faster adjustments
+                [1] = -5  -- Adjust the value to 0.1 for faster adjustments
             }
             game:GetService("ReplicatedStorage").Events.Remote.Client.changeRopeLength:FireServer(unpack(args))
         end
