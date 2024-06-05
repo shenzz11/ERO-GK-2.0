@@ -2,8 +2,7 @@
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-gui.Name = "ERO"
-gui.DisplayOrder = 999
+gui.Name = "SysBroker"
 gui.Parent = game:GetService("CoreGui")
 
 -- Create main frame
@@ -11,10 +10,10 @@ local frame = Instance.new("Frame")
 local yOffset = 10
 local buttonHeight = 30
 local buttonSpacing = 5
-local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
+local totalHeight = 9 * buttonHeight + 8 * buttonSpacing  -- Adjusted total height
 local totalWidth = 230
 frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
-frame.Position = UDim2.new(0.5, -totalWidth / 2, 0.5, -totalHeight / 2)
+frame.Position = UDim2.new(1, -totalWidth, 0, 10)
 frame.BackgroundTransparency = 0.5
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.Active = true
@@ -52,7 +51,7 @@ local assistiveTouch = Instance.new("TextButton")
 assistiveTouch.Text = "G"
 assistiveTouch.TextSize = 24
 assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(0.5, -15, 0.15, 0)
+assistiveTouch.Position = UDim2.new(1, -40, 0, -10)  -- Adjusted position
 assistiveTouch.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
 assistiveTouch.Parent = gui
 
@@ -118,7 +117,7 @@ createToggleButton("GiveSpeed", toggleSpeedScript)
 local button6 = Instance.new("TextButton")
 button6.Text = "GrappleLength: OFF"
 button6.Size = UDim2.new(0, 180, 0, buttonHeight)
-button6.Position = UDim2.new(0, 10, 0, yOffset)
+button6.Position = UDim2.new(0, 10, 0, 7 * (buttonHeight + buttonSpacing))  -- Adjusted position
 button6.Parent = frame
 
 local executingGrapple = false
@@ -133,7 +132,7 @@ spawn(function()
         wait(0.0001) -- Reduce the interval to 0.005 seconds for quicker adjustment
         if executingGrapple then
             local args = {
-                [1] = -1  -- Adjust the value to 0.1 for faster adjustments
+                [1] = -5  -- Adjust the value to 0.1 for faster adjustments
             }
             game:GetService("ReplicatedStorage").Events.Remote.Client.changeRopeLength:FireServer(unpack(args))
         end
