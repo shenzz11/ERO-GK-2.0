@@ -2,12 +2,21 @@
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-gui.Name = "SysBroker"
-gui.Parent = game.CoreGui
+gui.Name = "Shenzzz"
+gui.Parent = game:GetService("CoreGui")
+
+-- Create a container frame to hold both the assistive touch button and the main frame
+local containerFrame = Instance.new("Frame")
+containerFrame.Size = UDim2.new(0, 230, 0, 300)  -- Adjusted size
+containerFrame.Position = UDim2.new(0.5, -115, 0.5, -150)  -- Adjusted position
+containerFrame.BackgroundTransparency = 1  -- Make the container frame transparent
+containerFrame.Active = true
+containerFrame.Draggable = true
+containerFrame.Parent = gui
 
 -- Create main frame
 local frame = Instance.new("Frame")
-local yOffset = 40  -- Adjusted yOffset to accommodate the title bar
+local yOffset = 10
 local buttonHeight = 30
 local buttonSpacing = 5
 local totalHeight = 2 * yOffset + buttonHeight + buttonSpacing
@@ -15,28 +24,44 @@ local totalWidth = 230
 frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
 frame.Position = UDim2.new(1, -totalWidth, 0, 10)
 frame.BackgroundTransparency = 0.5
-frame.BackgroundColor3 = Color3.new(30/255, 30/255, 30/255) -- Updated background color
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.Active = true
 frame.Draggable = true
 frame.Parent = gui
 
--- Title Bar
-local titleBar = Instance.new("Frame")
-titleBar.Name = "TitleBar"
-titleBar.Size = UDim2.new(1, 0, 0, 30)
-titleBar.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-titleBar.BorderSizePixel = 0
-titleBar.Parent = frame
+-- Create Title Bar
+local titleBarLabel = Instance.new("TextLabel")
+titleBarLabel.Name = "TitleBarLabel"
+titleBarLabel.Parent = containerFrame
+titleBarLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+titleBarLabel.BackgroundTransparency = 0.25
+titleBarLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+titleBarLabel.BorderSizePixel = 0
+titleBarLabel.Size = UDim2.new(1, 0, 0, 30)
+titleBarLabel.Font = Enum.Font.SourceSans
+titleBarLabel.Text = "____/SYSTEMBROKEN\\___"
+titleBarLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
+titleBarLabel.TextScaled = true
+titleBarLabel.TextSize = 14.000
+titleBarLabel.TextWrapped = true
+titleBarLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleBarLabel.ZIndex = 9
 
-local titleTextLabel = Instance.new("TextLabel")
-titleTextLabel.Name = "TitleTextLabel"
-titleTextLabel.Size = UDim2.new(1, 0, 1, 0)
-titleTextLabel.BackgroundTransparency = 1
-titleTextLabel.Text = "GRAPKILL BY ERO"
-titleTextLabel.TextColor3 = Color3.new(1, 1, 1)
-titleTextLabel.Font = Enum.Font.SourceSansBold
-titleTextLabel.TextSize = 18
-titleTextLabel.Parent = titleBar
+-- Create Assistive Touch Button
+local assistiveTouch = Instance.new("TextButton")
+assistiveTouch.Text = "G"
+assistiveTouch.TextSize = 24
+assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
+assistiveTouch.Position = UDim2.new(1, -40, 0, 45)
+assistiveTouch.BackgroundColor3 = Color3.fromRGB(0.8, 0.8, 0.8)
+assistiveTouch.Parent = containerFrame
+
+local collapsed = true
+
+assistiveTouch.MouseButton1Click:Connect(function()
+    collapsed = not collapsed
+    frame.Visible = not collapsed
+end)
 
 -- Function to create toggle buttons
 local function createToggleButton(text, toggleFunction, customCode)
@@ -44,6 +69,9 @@ local function createToggleButton(text, toggleFunction, customCode)
     button.Text = text .. ": OFF"
     button.Size = UDim2.new(0, 180, 0, buttonHeight)
     button.Position = UDim2.new(0, 10, 0, yOffset)
+    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    button.BorderColor3 = Color3.fromRGB(0, 255, 255)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
     button.Parent = frame
 
     yOffset = yOffset + buttonHeight + buttonSpacing
@@ -63,22 +91,6 @@ local function createToggleButton(text, toggleFunction, customCode)
     button.MouseButton1Click:Connect(toggleButton)
     return button
 end
-
--- Create Assistive Touch Button
-local assistiveTouch = Instance.new("TextButton")
-assistiveTouch.Text = "G"
-assistiveTouch.TextSize = 24
-assistiveTouch.Size = UDim2.new(0, 30, 0, 30)
-assistiveTouch.Position = UDim2.new(1, -40, 0, 45) -- Adjusted position to move it slightly higher
-assistiveTouch.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
-assistiveTouch.Parent = gui
-
-local collapsed = true
-
-assistiveTouch.MouseButton1Click:Connect(function()
-    collapsed = not collapsed
-    frame.Visible = not collapsed
-end)
 
 -- Toggle Damage Size Function
 local function toggleDamageSize(isEnabled)
@@ -136,6 +148,9 @@ local button6 = Instance.new("TextButton")
 button6.Text = "GrappleLength: OFF"
 button6.Size = UDim2.new(0, 180, 0, buttonHeight)
 button6.Position = UDim2.new(0, 10, 0, yOffset)
+button6.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+button6.BorderColor3 = Color3.fromRGB(0, 255, 255)
+button6.TextColor3 = Color3.fromRGB(255, 255, 255)
 button6.Parent = frame
 
 local executingGrapple = false
@@ -147,7 +162,7 @@ end)
 
 spawn(function()
     while true do
-        wait(0.0001) -- Reduce the interval to 0.005 seconds for quicker adjustments
+        wait(0.005) -- Adjusted interval for quicker adjustment
         if executingGrapple then
             local args = {
                 [1] = -1  -- Adjust the value to 0.1 for faster adjustments
