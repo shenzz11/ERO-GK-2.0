@@ -5,7 +5,7 @@ gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Name = "Shenzzz"
 gui.Parent = game:GetService("CoreGui")
 
--- Create a container frame to hold the main frame
+-- Create a container frame to hold the main frame and title bar
 local containerFrame = Instance.new("Frame")
 containerFrame.Size = UDim2.new(0, 230, 0, 300)  -- Adjusted size
 containerFrame.Position = UDim2.new(0.5, -115, 0.5, -150)  -- Adjusted position
@@ -149,6 +149,11 @@ createToggleButton("TOUCH", toggleTouch)
 local function removeRagdoll(isEnabled)
     if isEnabled then
         local LocalPlayer = game.Players.LocalPlayer
+        if Local
+-- Remove Ragdoll Function
+local function removeRagdoll(isEnabled)
+    if isEnabled then
+        local LocalPlayer = game.Players.LocalPlayer
         if LocalPlayer.Character:FindFirstChild("ragdollValue") then
             LocalPlayer.Character.ragdollValue:Destroy()
         end
@@ -201,3 +206,4 @@ spawn(function()
         end
     end
 end)
+
