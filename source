@@ -5,7 +5,7 @@ gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Name = "Shenzzz"
 gui.Parent = game:GetService("CoreGui")
 
--- Create a container frame to hold the main frame and title bar
+-- Create a container frame to hold the main frame
 local containerFrame = Instance.new("Frame")
 containerFrame.Size = UDim2.new(0, 230, 0, 300)  -- Adjusted size
 containerFrame.Position = UDim2.new(0.5, -115, 0.5, -150)  -- Adjusted position
@@ -77,19 +77,9 @@ assistiveTouch.MouseButton1Click:Connect(function()
 
     -- Adjust transparency to ensure it doesn't block interactions when collapsed
     if collapsed then
-        containerFrame.BackgroundTransparency = 1
-        for _, child in ipairs(containerFrame:GetChildren()) do
-            if child:IsA("TextLabel") or child:IsA("TextButton") then
-                child.Visible = false
-            end
-        end
+        frame.BackgroundTransparency = 1
     else
-        containerFrame.BackgroundTransparency = 0.5
-        for _, child in ipairs(containerFrame:GetChildren()) do
-            if child:IsA("TextLabel") or child:IsA("TextButton") then
-                child.Visible = true
-            end
-        end
+        frame.BackgroundTransparency = 0.5
     end
 end)
 
@@ -145,11 +135,6 @@ end
 
 createToggleButton("TOUCH", toggleTouch)
 
--- Remove Ragdoll Function
-local function removeRagdoll(isEnabled)
-    if isEnabled then
-        local LocalPlayer = game.Players.LocalPlayer
-        if Local
 -- Remove Ragdoll Function
 local function removeRagdoll(isEnabled)
     if isEnabled then
