@@ -19,7 +19,7 @@ local frame = Instance.new("Frame")
 local yOffset = 40 -- Increased to account for the title bar
 local buttonHeight = 30
 local buttonSpacing = 5
-local totalHeight = 8 * buttonHeight + 9 * buttonSpacing + yOffset -- Adjusted total height
+local totalHeight = 6 * buttonHeight + 6 * buttonSpacing + yOffset -- Adjusted total height
 local totalWidth = 210  -- Adjusted width
 frame.Size = UDim2.new(0, totalWidth, 0, totalHeight)
 frame.Position = UDim2.new(0, 10, 0, 10)  -- Adjusted position
@@ -185,10 +185,9 @@ spawn(function()
         wait(0.005) -- Adjusted interval for quicker adjustment
         if executingGrapple then
             local args = {
-                [1] = -2  -- Adjust the value to 0.1 for faster adjustments
+                [1] = -1  -- Adjust the value to 0.1 for faster adjustments
             }
             game:GetService("ReplicatedStorage").Events.Remote.Client.changeRopeLength:FireServer(unpack(args))
         end
     end
 end)
-
