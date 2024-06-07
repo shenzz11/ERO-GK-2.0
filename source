@@ -54,7 +54,7 @@ assistiveTouchFrame.Position = UDim2.new(1, -60, 0, 10)  -- Positioned at the up
 assistiveTouchFrame.AnchorPoint = Vector2.new(1, 0)  -- Adjusted anchor point for correct positioning
 assistiveTouchFrame.BackgroundTransparency = 1  -- Make the container frame transparent
 assistiveTouchFrame.Active = true
-assistiveTouchFrame.Draggable = true
+assistiveTouchFrame.Draggable = true -- Made the frame draggable
 assistiveTouchFrame.Parent = gui
 
 -- Create Assistive Touch Button
