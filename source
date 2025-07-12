@@ -1,4 +1,4 @@
--- 💩 POOP FLOOD TROLL SCRIPT 💩
+-- 💩 POOP FLOOD TROLL SCRIPTT 💩
 if game.CoreGui:FindFirstChild("PoopFlood") then return end
 
 local poopGui = Instance.new("ScreenGui")
